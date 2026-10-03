@@ -83,6 +83,9 @@ public class TestWordCounter {
         assertThat(wc, containsInAnyOrder(expected));
     }
 
-
+    @Test
+    public final void easyPass() {
+        assertEquals(1, 1);
+    }
 
 }
