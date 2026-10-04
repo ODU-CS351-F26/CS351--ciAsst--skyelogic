@@ -18,7 +18,7 @@ jobs:
       uses: actions/setup-java@v6
       with:
         java-version: '21'
-        distribution: 'adopt'
+        distribution: 'temurin'
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build and test
@@ -26,7 +26,9 @@ jobs:
     - name: Generate reports
       run: ./gradlew reports
     - name: Deploy reports to website
-      run: ./gradlew deployReports
-      env:
-        GRGIT_USER: x-access-token
-        GRGIT_PASS: ${{ secrets.GITHUB_TOKEN }}
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: ./build/reports
+        enable_jekyll: true
